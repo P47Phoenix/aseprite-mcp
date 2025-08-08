@@ -64,6 +64,30 @@ docker-compose --profile dev up aseprite-mcp-dev
 - **User**: Non-root user `mcpuser` for security
 - **Working Directory**: `/app`
 
+## Optional: Install Aseprite via SteamCMD
+
+The image includes SteamCMD to optionally install Aseprite at container startup. This is useful if you own Aseprite on Steam and want the official binary.
+
+Environment variables:
+- `STEAM_USERNAME` and `STEAM_PASSWORD` (required to install paid app)
+- `STEAM_GUARD_CODE` (optional; if Steam Guard prompts)
+- `STEAM_APPID` (default `431730`)
+- `STEAM_INSTALL_DIR` (default `/opt/steamapps`)
+
+Run examples:
+```powershell
+# Windows PowerShell
+# Reads credentials from a .env file (recommended)
+docker run --rm -i --env-file .env aseprite-mcp:latest
+
+# Or pass inline (not recommended for security)
+docker run --rm -i -e STEAM_USERNAME=you -e STEAM_PASSWORD=secret aseprite-mcp:latest
+```
+
+On successful install, the binary is placed at:
+`/opt/steamapps/common/Aseprite/aseprite`
+and `ASEPRITE_PATH` is set automatically if not provided.
+
 ## Environment Variables
 
 If you need to pass environment variables, create a `.env` file based on `sample.env` and uncomment the `env_file` section in `docker-compose.yml`.

@@ -31,6 +31,18 @@ docker-compose --profile dev up aseprite-mcp-dev
 
 See [DOCKER.md](DOCKER.md) for detailed Docker setup instructions.
 
+### Optional: Install Aseprite via Steam
+
+To have the container install Aseprite via SteamCMD at startup, provide Steam credentials:
+
+```powershell
+# Create a .env with STEAM_USERNAME/STEAM_PASSWORD (and optional STEAM_GUARD_CODE)
+# Then
+docker run --rm -i --env-file .env aseprite-mcp:latest
+```
+
+If installed, the binary will be at `/opt/steamapps/common/Aseprite/aseprite` and `ASEPRITE_PATH` will be picked up automatically.
+
 ## Local Installation
 
 ### Prerequisites
